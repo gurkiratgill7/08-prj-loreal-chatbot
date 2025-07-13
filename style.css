@@ -62,17 +62,32 @@ body {
 }
 
 /* messages */
-.msg {
+.message {
   margin-bottom: 14px;
-  line-height: 1.5;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+  display: flex;
 }
 
-.msg.user {
+.message.user {
+  background-color: var(--loreal-pink);
+  color: var(--loreal-white);
+  /* align-self: flex-end; */
+  margin-left: auto;
+  margin-right: 0;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.message.bot {
+  background-color: var(--loreal-gray);
   color: var(--loreal-black);
-}
-
-.msg.ai {
-  color: #666666;
+  margin-left: 0;
+  margin-right: auto;
+  text-align: left;
+  justify-content: flex-start;
 }
 
 /* input row */
