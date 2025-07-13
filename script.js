@@ -7,8 +7,8 @@ const chatWindow = document.getElementById("chatWindow");
 chatWindow.innerHTML =
   "<div class='message bot'><p>👋 Hello! How can I help you today?</p></div>";
 
-// OpenAI API endpoint
-const API_URL = "https://api.openai.com/v1/chat/completions";
+// Cloudflare Worker endpoint
+const API_URL = "https://lorealchatbot.gkiratg7.workers.dev/";
 
 // System prompt for the chatbot
 const systemPrompt =
@@ -39,17 +39,13 @@ chatForm.addEventListener("submit", async (e) => {
   chatWindow.appendChild(loadingMessage);
 
   try {
-    // Send request to OpenAI API
+    // Send request to Cloudflare Worker
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${API_KEY}`,
       },
-      body: JSON.stringify({
-        model: "gpt-4o",
-        messages: conversationHistory,
-      }),
+      body: JSON.stringify({ messages: conversationHistory }),
     });
 
     const data = await response.json();
@@ -66,7 +62,7 @@ chatForm.addEventListener("submit", async (e) => {
     loadingMessage.remove();
     chatWindow.innerHTML +=
       "<div class='message bot'><p>⚠️ Sorry, something went wrong. Please try again later.</p></div>";
-    console.error("Error fetching OpenAI API response:", error);
+    console.error("Error fetching Cloudflare Worker response:", error);
   }
 
   // Scroll to the bottom of the chat window
